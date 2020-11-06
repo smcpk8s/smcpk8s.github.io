@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #21262c;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <a href="/">Home</a>
+  <a href="#">Spinnaker</a>
+  <a href="#multi">Multi-Cloud</a>
+  <a href="#integrations">CI Integrations</a>
+  <a href="#monitoring">Monitoring Integrations</a>
+  <a href="#cli">CLI for Setup and Admin</a>
+  <a href="#deployment">Deployment Strategies</a>
+  <a href="#vm">VM Bakery</a>
+  <a href="#notifications">Notifications</a>
+</div>
+
+<div class="main">
+  <h2>Multi-Cloud</h2>
+  <p id="multi">Deploy across multiple cloud providers including AWS EC2, Kubernetes, Google Compute Engine, Google Kubernetes Engine, Google App Engine, Microsoft Azure, Openstack, Cloud Foundry, and Oracle Cloud Infrastructure, with DC/OS coming soon.<br>Create deployment pipelines that run integration and system tests, spin up and down server groups, and monitor your rollouts. Trigger pipelines via git events, Jenkins, Travis CI, Docker, CRON, or other Spinnaker pipelines.<br>Create and deploy immutable images for faster rollouts, easier rollbacks, and the elimination of hard to debug configuration drift issues. Leverage an immutable infrastructure in the cloud with built-in deployment strategies such as red/black and canary deployments.<br>Join a community that includes Netflix, Google, Microsoft, Veritas, Target, Kenzan, Schibsted, and many others, actively working to maintain and improve Spinnaker.</p>
+
+<h2 id="integrations">CI Integrations</h2>
+
+<p> Listen to events, collect artifacts, and trigger pipelines from Jenkins or Travis CI. Triggers via git, cron, or a new image in a docker registry are also supported.</p>
+
+<h2 id="monitoring">Monitoring Integrations</h2>
+
+<p> Tie your releases to monitoring services Datadog, Prometheus, Stackdriver, SignalFx, or New Relic using their metrics for canary analysis.</p>
+
+<h2 id="cli">CLI for Setup and Admin</h2>
+
+<p> Install, configure, and update your Spinnaker instance with halyard, Spinnaker’s CLI tool.</p>
+
+<h2 id="deployment">Deployment Strategies</h2>
+
+<p> Configure pipelines with built-in deployment strategies such as highlander and red/black, with rolling red/black and canary in active development, or define your own custom strategy.</p>
+
+<h2 id="vm">VM Bakery</h2>
+
+<p> Bake immutable VM images via Packer, which comes packaged with Spinnaker and offers support for Chef and Puppet templates.</p>
+
+<h2 id="notifications">Notifications</h2>
+
+<p> Set up event notifications for email, Slack, HipChat, or SMS (via Twilio).</p>
+
+
+</div>
+   
+</body>
+</html> 
