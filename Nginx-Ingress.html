@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #21262c;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+  <a href="/">Home</a>
+  <a href="#">Nginx-Ingress</a>
+  <a href="#welcome">Welcome</a>
+  <a href="#work">How it works</a>
+</div>
+
+<div class="main">
+  <h2 id="welcome">Welcome</h2>
+  <p>This is the documentation for the NGINX Ingress Controller.
+
+It is built around the Kubernetes Ingress resource, using a ConfigMap to store the NGINX configuration.
+
+Learn more about using Ingress on k8s.io.<br>See Deployment for a whirlwind tour that will get you started.</p>
+
+<h2 id="work">How it works</h2>
+
+<p> The objective of this document is to explain how the NGINX Ingress controller works, in particular how the NGINX model is built and why we need one.<br>The goal of this Ingress controller is the assembly of a configuration file (nginx.conf). The main implication of this requirement is the need to reload NGINX after any change in the configuration file. Though it is important to note that we don't reload Nginx on changes that impact only an upstream configuration (i.e Endpoints change when you deploy your app). We use lua-nginx-module to achieve this. Check below to learn more about how it's done.<br>Usually, a Kubernetes Controller utilizes the synchronization loop pattern to check if the desired state in the controller is updated or a change is required. To this purpose, we need to build a model using different objects from the cluster, in particular (in no special order) Ingresses, Services, Endpoints, Secrets, and Configmaps to generate a point in time configuration file that reflects the state of the cluster.
+
+To get this object from the cluster, we use Kubernetes Informers, in particular, FilteredSharedInformer. This informers allows reacting to changes in using callbacks to individual changes when a new object is added, modified or removed. Unfortunately, there is no way to know if a particular change is going to affect the final configuration file. Therefore on every change, we have to rebuild a new model from scratch based on the state of cluster and compare it to the current model. If the new model equals to the current one, then we avoid generating a new NGINX configuration and triggering a reload. Otherwise, we check if the difference is only about Endpoints. If so we then send the new list of Endpoints to a Lua handler running inside Nginx using HTTP POST request and again avoid generating a new NGINX configuration and triggering a reload. If the difference between running and new model is about more than just Endpoints we create a new NGINX configuration based on the new model, replace the current model and trigger a reload.
+
+One of the uses of the model is to avoid unnecessary reloads when there's no change in the state and to detect conflicts in definitions.
+
+The final representation of the NGINX configuration is generated from a Go template using the new model as input for the variables required by the template.</p>
+</div>
+   
+</body>
+</html> 
