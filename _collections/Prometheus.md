@@ -1,5 +1,5 @@
 ---
-layout: Documentation
+layout: default
 title: "Prometheus"
 ---
 
