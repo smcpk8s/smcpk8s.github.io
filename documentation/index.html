@@ -5,7 +5,7 @@ title: SMCPK8S Documentation
 	<h1>{{ page.title }}</h1>
 	<ul class="collections">
 
-	  {% for post in site.posts %}
-	    <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+	  {% for collections in site.collections %}
+	    <li><a href="{{ collections.url }}" title="{{ collections.title }}">{{ collections.title }}</a></li>
 	  {% endfor %}
 	</ul>
