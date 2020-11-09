@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: Documentation
 title: "Prometheus"
 date: 2020-11-02
 ---
